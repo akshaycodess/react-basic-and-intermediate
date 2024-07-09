@@ -2,7 +2,7 @@ import React from "react"
 
 export class NameClass extends React.Component {
     render() {
-            return <h1>Akshay Singh via class component</h1>;
+            return <h2>Akshay Singh via class component</h2>;
     }
 }
 
