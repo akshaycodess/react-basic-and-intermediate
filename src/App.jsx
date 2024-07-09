@@ -4,6 +4,9 @@ import { TodoList } from "./TodoList"
 import { TodoListClass } from "./TodoListClass"
 import { TodoListItem } from "./TodoListItem"
 import { TodoListItemClass } from "./TodoListItemClass"
+import "./style.css"
+import user from './User.json'
+import img from './image.png'
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
       <TodoListItemClass isComplete> 
         TodoListItemClass2 checked
       </TodoListItemClass>
+      <h2>Importing non-js files</h2>
+      <p>sample user json example: {JSON.stringify(user)}</p>
+      <p>sample image: <img src={img} width={100} /></p>
     </div>
   );
 }
