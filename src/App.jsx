@@ -1,7 +1,7 @@
+import { ArrayComponent } from "./ArrayComponent"
+
 function App() {
-  return (
-    "Hello World"
-  )
+  return <ArrayComponent />
 }
 
 export default App
