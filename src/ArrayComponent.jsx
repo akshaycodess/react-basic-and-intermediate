@@ -5,6 +5,7 @@ const INITIAL_ARRAY = ["A", "B", "C"]
 
 export function ArrayComponent() {
     const [array, setArray] = useState(INITIAL_ARRAY)
+    const [inputValue, setInputValue] = useState('')
 
     // 2. Add the ability to remove the first element from the array
     function removeFirstElement() {
@@ -22,7 +23,7 @@ export function ArrayComponent() {
     // 5. Add the ability to add a new element to the end of the array
     function addNewElemetToStartAndEnd(letter, position = 'start') {
         setArray((currentArray) => {
-        return (position == 'start') ? [letter, ...currentArray] : [...currentArray, letter]
+            return (letter != '') ? ((position == 'start') ? [letter, ...currentArray] : [...currentArray, letter]) : currentArray
         })
     }
     // 6. Add the ability to clear the array
@@ -32,6 +33,26 @@ export function ArrayComponent() {
     // 7. Add the ability to reset the array to the initial value
     function resetArray() {
         setArray(INITIAL_ARRAY)
+    }
+    // 8. Add the ability to update all X elements in the array to H
+    function updateXtoH(searchValue, replaceValue) {
+        setArray((currentArray) => {
+            return currentArray.map((element) => {
+                if (element === searchValue) return replaceValue
+                    return element
+                })
+        })
+    }
+    // 10. Add the ability to add a new element at any index in the array
+    function addLetterAtAnyIndex(letter, index) {
+        setArray((currentArray) => {
+            currentArray.slice(index, 0, letter)
+            return [
+                ...currentArray.slice(0, index),
+                letter,
+                ...currentArray.slice(index),
+            ]
+        })
     }
 
     return (
@@ -50,7 +71,16 @@ export function ArrayComponent() {
             <button onClick={clearArray}>clear</button>
             &nbsp;
             <button onClick={resetArray}>reset</button>
+            {/* Bonus functions */}
             &nbsp;
+            <button onClick={() => updateXtoH('X', 'H')}>update 'X' to 'H'</button>
+            &nbsp;
+            <button onClick={() => addLetterAtAnyIndex('B', 2)}>add 'B' at '2'</button>
+            <br />
+            {/* 9. Add an input that is connected to state and a button that will add the input value to the start of the array */}
+            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            &nbsp;
+            <button onClick={() => addNewElemetToStartAndEnd(inputValue)}>input value to add to array</button>
         </div>
     )
 
