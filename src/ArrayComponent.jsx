@@ -46,7 +46,6 @@ export function ArrayComponent() {
     // 10. Add the ability to add a new element at any index in the array
     function addLetterAtAnyIndex(letter, index) {
         setArray((currentArray) => {
-            currentArray.slice(index, 0, letter)
             return [
                 ...currentArray.slice(0, index),
                 letter,
