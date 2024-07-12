@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Child } from "./Child"
 import { ChildClass } from "./ChildClass";
+import { FetchData } from "./FetchData";
 
 export default function App() {
   const [show, setShow] = useState(true)
@@ -16,6 +17,7 @@ export default function App() {
       {childComponent}
       <h1>useEffect via lifecycle Implementation</h1>
       {childClassComponent}
+      <FetchData />
     </div>
   );
 }
