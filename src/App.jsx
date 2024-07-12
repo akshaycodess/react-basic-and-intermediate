@@ -8,12 +8,13 @@ export default function App() {
   const childClassComponent = show ? <ChildClass /> : null
 
   return (
-    <div style={{ textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
       <h1>useEffect Hook Implementation</h1>
       <button onClick={() => setShow((currentShow) => !currentShow)}>
         Show/Hide
       </button>
       {childComponent}
+      <h1>useEffect via lifecycle Implementation</h1>
       {childClassComponent}
     </div>
   );
