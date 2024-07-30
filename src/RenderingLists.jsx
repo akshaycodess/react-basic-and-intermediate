@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, Fragment } from "react"
 
 export function RenderingLists() {
   const [items, setItems] = useState([
@@ -13,14 +13,22 @@ export function RenderingLists() {
   }
 
   return (
-    <div>
-      <h3>Rendering Lists</h3>
+    <>
+      <h3>Rendering Lists & Fragment</h3>
       <button onClick={addItem}>Add Item</button>
       <pre>
         {items.map(item => {
-          return <div key={item.id}><label key={item.id}>{item.name} <input type="text" /></label><br /></div>
+          return (
+            <Fragment key={item.id}>
+              <label>
+                {item.name}
+                <input type="text" />
+              </label>
+              <br />
+            </Fragment>
+          )
         })}
       </pre>
-    </div>
-  );
+    </>
+  )
 }
