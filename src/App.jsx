@@ -1,7 +1,14 @@
+import { ConditionalRendering } from "./ConditionalRendering";
+import { RenderingLists } from "./RenderingLists";
+
 function App() {
   return (
-    "Hello World"
-  )
+    <div>
+      <h1>Advance Components</h1>
+      <ConditionalRendering favNo={8} />
+      <RenderingLists />
+    </div>
+  );
 }
 
 export default App
