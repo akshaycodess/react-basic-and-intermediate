@@ -6,9 +6,14 @@ import { validateEmail, validatePassword } from "./validators"
     const passwordRef = useRef()
     const [emailErros, setEmailErrors] = useState([])
     const [passwordErros, setPasswordErrors] = useState([])
-    
+    // Bonus
+    const [isAfterFirstSubmit, setIsAfterFirstSubmit] = useState(false)
+
     function handleSubmit(e) {
         e.preventDefault()
+        // Bonus
+        setIsAfterFirstSubmit(true)
+
         const emailResults = validateEmail(emailRef.current.value)
         const passwordResults = validatePassword(passwordRef.current.value)
         
@@ -30,6 +35,12 @@ import { validateEmail, validatePassword } from "./validators"
             type="email"
             id="email"
             ref={emailRef}
+            // Bonus
+            onChange={
+                isAfterFirstSubmit
+                ? e => setEmailErrors(validateEmail(e.target.value))
+                : undefined
+            }
             />
             {emailErros.length > 0 && (<div className="msg">{emailErros.join(", ")}</div>)}
         </div>
@@ -42,6 +53,12 @@ import { validateEmail, validatePassword } from "./validators"
             type="password"
             id="password"
             ref={passwordRef}
+            // Bonus
+            onChange={
+                isAfterFirstSubmit
+                ? e => setPasswordErrors(validatePassword(e.target.value))
+                : undefined
+            }
             />
             {passwordErros.length > 0 && (<div className="msg">{passwordErros.join(", ")}</div>)}
         </div>
