@@ -1,9 +1,23 @@
 
 import { FormGroup } from "./FormGroup"
-import { useForm } from "react-hook-form"
+import ReactSelect from "react-select"
+import { useController, useForm } from "react-hook-form"
+
+const COUNTRY_OPTIONS = [
+    { label: "United States", value: "US" },
+    { label: "India", value: "IN" },
+    { label: "Mexico", value: "MX" },
+]
 
 export default function FormComponent() {
-    const { register, handleSubmit, formState: { errors },} = useForm()
+    const { register, handleSubmit, formState: { errors }, control,} = useForm()
+
+    // useController is for controlled inputs
+    const { field: countryField } = useController({
+        name: "country",
+        control,
+        rules: { required: { value: true, message: "Required" } },
+    })
 
     function onSubmit(data) {
         console.log(data)
@@ -64,6 +78,19 @@ export default function FormComponent() {
                             },
                         },
                     })}
+                />
+            </FormGroup>
+            {/* Country */}
+            <FormGroup errorMessage={errors?.country?.message}>
+                <label className="label" htmlFor="country">
+                Country
+                </label>
+                <ReactSelect
+                    isClearable
+                    classNamePrefix="react-select"
+                    id="country"
+                    options={COUNTRY_OPTIONS}
+                    {...countryField}
                 />
             </FormGroup>
             <button className="btn" type="submit">Submit</button>
