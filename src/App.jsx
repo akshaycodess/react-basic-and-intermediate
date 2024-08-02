@@ -1,6 +1,12 @@
-function App() {
+import Counter from "./Counter"
+
+function App() {  
   return (
-    "Hello World"
+    <>
+      <h1>Advance Stateful Components</h1>
+      <h2>useReducer hook</h2>
+      <Counter />
+    </>
   )
 }
 
