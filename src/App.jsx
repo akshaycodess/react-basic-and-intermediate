@@ -37,6 +37,14 @@ function reducer(todos, { type, payload }) {
 
         return todo
       })
+    case ACTIONS.UPDATE:
+      return todos.map(todo => {
+        if (todo.id === payload.id) {
+          return { ...todo, name: payload.name }
+        }
+
+        return todo
+      })
     default:
       throw new Error(`No action found for ${type}.`)
   }
@@ -54,7 +62,7 @@ function App() {
   })
 
   const filterTodos = todos.filter((todo) => {
-    if(hideCompletedFilter && todo.completed) return false
+    if (hideCompletedFilter && todo.completed) return false
     return todo.name.includes(filterName)
   })
 
@@ -74,6 +82,10 @@ function App() {
   function deleteTodo(todoId) {
     dispatch({ type: ACTIONS.DELETE, payload: { id: todoId } })
   }
+  // to update item name
+  function updateTodoName(id, name) {
+    dispatch({ type: ACTIONS.UPDATE, payload: { id, name } })
+  }
 
   return (
     <TodoContext.Provider
@@ -82,6 +94,7 @@ function App() {
         addNewTodo,
         toggleTodo,
         deleteTodo,
+        updateTodoName,
       }}
     >
       <h1>Advanced Todo List Project</h1>
@@ -94,7 +107,7 @@ function App() {
       <TodoList />
       <TodoForm />
     </TodoContext.Provider>
-  );
+  )
 }
 
 export default App
@@ -103,3 +116,7 @@ export default App
 // 1. The state for our todos should be stored in local storage so when we come back to the page at a later time all our data is still there
 // 2. Convert all the state in the application to use `useReducer` and `Context` to pass the state between components
 // 3. Add a form that lets you filter todos by their name and hide completed todos
+
+// Bonus
+// 1. Add the ability to edit existing todos
+// This is in the bonus section not because the editing portion is tricky, but because handling the proper UI state of swapping between text and an input is something we haven't really done before
