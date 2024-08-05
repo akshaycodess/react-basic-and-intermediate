@@ -1,4 +1,5 @@
 # Advance components project
 
-- Chapter 41-42 Todo list project
-![output](41-42-todo-list.png)
+- Chapter 69-69 Advance todo list project
+![output](68-69-advanced-todo-list.png)
+![bonus](68-69-advanced-todo-list-bonus.png)
