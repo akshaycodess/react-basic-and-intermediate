@@ -1,10 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./style.css"
 import { TodoItem } from "./TodoItem"
 
+const LOCAL_STORAGE_KEY = "todos"
+
 function App() {
   const [newTodoName, setNewTodoName] = useState("")
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(() => {
+    const value = localStorage.getItem(LOCAL_STORAGE_KEY)
+    if (value == null) return []
+    return JSON.parse(value)
+  })
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
+  }, [todos])
 
   // add new todo item
   function addNewTodo() {
@@ -67,3 +77,6 @@ function App() {
 }
 
 export default App
+
+// Instructions
+// 1. The state for our todos should be stored in local storage so when we come back to the page at a later time all our data is still there
