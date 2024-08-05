@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useState } from "react"
+import { createContext, useEffect, useReducer } from "react"
 import "./style.css"
-import { TodoItem } from "./TodoItem"
 import { TodoForm } from "./TodoForm"
+import { TodoList } from "./TodoList"
 
 const LOCAL_STORAGE_KEY = "todos"
 const ACTIONS = {
@@ -41,6 +41,8 @@ function reducer(todos, { type, payload }) {
   }
 }
 
+export const TodoContext = createContext()
+
 function App() {
   const [todos, dispatch] = useReducer(reducer, [], (initialValue) => {
     const value = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -66,22 +68,18 @@ function App() {
   }
 
   return (
-    <>
+    <TodoContext.Provider
+      value={{
+        todos,
+        addNewTodo,
+        toggleTodo,
+        deleteTodo,
+      }}
+    >
       <h1>Advanced Todo List Project</h1>
-      <ul id="list">
-        {todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-            />
-          )
-        })}
-      </ul>
-      <TodoForm addNewTodo={addNewTodo} />
-    </>
+      <TodoList />
+      <TodoForm />
+    </TodoContext.Provider>
   )
 }
 
